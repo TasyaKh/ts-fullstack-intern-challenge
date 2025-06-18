@@ -8,19 +8,19 @@ export interface LikeResponse {
 
 export const likesApi = {
   getAllLikes: async () => {
-    const response = await serverInstance.get<{ data: LikeResponse[] }>('/likes');
+    const response = await serverInstance.get<{ data: LikeResponse[] }>('/api/likes');
   
     return response.data.data;
   },
 
   addLike: async (catId: string) => {
-    const response = await serverInstance.post<LikeResponse>('/likes', {
+    const response = await serverInstance.post<LikeResponse>('/api/likes', {
       cat_id: catId,
     });
     return response.data;
   },
 
   removeLike: async (catId: string) => {
-    await serverInstance.delete(`/likes/${catId}`);
+    await serverInstance.delete(`/api/likes/${catId}`);
   },
 };
