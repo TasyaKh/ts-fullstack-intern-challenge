@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AllCats from './pages/AllCats';
-import FavoriteCats from './pages/FavoriteCats';
 import './App.scss';
 import Navbar from './components/Navbar/Navbar';
+import AllCats from './pages/AllCats/AllCats';
+import FavoriteCats from './pages/FavoriteCats/FavoriteCats';
 
 function App() {
   return (

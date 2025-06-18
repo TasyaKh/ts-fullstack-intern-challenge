@@ -1,0 +1,16 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 225px));
+  gap: 48px;
+  justify-content: center;
+  place-items: center;
+  padding: 48px 0;
+}
+
+.endMessage {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2em;
+  color: #666;
+  padding-bottom: 31px;
+} 
