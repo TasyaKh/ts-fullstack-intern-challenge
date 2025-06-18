@@ -1,31 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CatCard from "../../components/CatCard/CatCard";
 import catsStore from "../../store/catsStore";
 import styles from "./AllCats.module.scss";
-import { likesApi, LikeResponse } from "../../api/likesApi";
+import likesStore from "../../store/ likesStore";
 
 const AllCats = observer(() => {
-  const [likes, setLikes] = useState<LikeResponse[]>([]);
-
   useEffect(() => {
-    const loadLikes = async () => {
-      const likesData = await likesApi.getAllLikes();
-      setLikes(likesData);
-    };
-    loadLikes();
+    likesStore.loadLikedCatIds();
     catsStore.loadMoreCats();
   }, []);
 
   const handleLike = async (catId: string) => {
-    const isLiked = likes.some(like => like.catId === catId);
-    if (isLiked) {
-      await likesApi.removeLike(catId);
-      setLikes(likes.filter(like => like.catId !== catId));
+    if (likesStore.isLiked(catId)) {
+      await likesStore.removeLike(catId);
     } else {
-      const newLike = await likesApi.addLike(catId);
-      setLikes([...likes, newLike]);
+      await likesStore.addLike(catId);
     }
   };
 
@@ -35,17 +26,19 @@ const AllCats = observer(() => {
         dataLength={catsStore.cats.length}
         next={catsStore.loadMoreCats}
         hasMore={catsStore.hasMore}
-        loader={<div className={styles.endMessage}>... загружаем еще котиков ...</div>}
+        loader={
+          <div className={styles.endMessage}>... загружаем еще котиков ...</div>
+        }
         endMessage={
           <div className={styles.endMessage}>Больше котиков нет 😿</div>
         }
       >
         <div className={styles.grid}>
           {catsStore.cats.map((cat, index) => (
-            <CatCard 
-              key={`${cat.id} ${index}`} 
-              cat={cat} 
-              isLiked={likes.some(like => like.catId === cat.id)}
+            <CatCard
+              key={`${cat.id} ${index}`}
+              cat={cat}
+              isLiked={likesStore.isLiked(cat.id)}
               onLike={() => handleLike(cat.id)}
             />
           ))}

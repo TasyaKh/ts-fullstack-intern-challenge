@@ -11,7 +11,11 @@ export class FavoriteCatsService {
   ) {}
 
   async findAll(): Promise<FavoriteCat[]> {
-    return this.favoriteCatsRepository.find();
+    return this.favoriteCatsRepository.find({
+      order: {
+        createdAt: 'DESC',
+      },
+    });
   }
 
   async create(catId: string): Promise<FavoriteCat> {

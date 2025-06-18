@@ -3,7 +3,6 @@ import { observer } from "mobx-react-lite";
 import CatCard from "../../components/CatCard/CatCard";
 import favoriteCatsStore from "../../store/favoriteCatsStore";
 import styles from "./FavoriteCats.module.scss";
-import { likesApi } from "../../api/likesApi";
 
 const FavoriteCats = observer(() => {
   useEffect(() => {
@@ -11,8 +10,7 @@ const FavoriteCats = observer(() => {
   }, []);
 
   const handleLike = async (catId: string) => {
-    await likesApi.removeLike(catId);
-    favoriteCatsStore.loadFavoriteCats(); // Reload after removing
+    await favoriteCatsStore.removeLike(catId);
   };
 
   return (
