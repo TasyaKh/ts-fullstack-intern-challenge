@@ -1,5 +1,5 @@
-import { FC, ReactNode, useState } from 'react';
-import styles from './SelectButton.module.scss';
+import { FC, ReactNode, useState } from "react";
+import styles from "./SelectButton.module.scss";
 
 interface IconButtonProps {
   selectedIcon: ReactNode;
@@ -7,6 +7,8 @@ interface IconButtonProps {
   unselectedIcon: ReactNode;
   isSelected: boolean;
   onClick: () => void;
+  width?: string;
+  height?: string;
 }
 
 export const SelectButton: FC<IconButtonProps> = ({
@@ -15,6 +17,8 @@ export const SelectButton: FC<IconButtonProps> = ({
   unselectedIcon,
   isSelected,
   onClick,
+  width = "40px",
+  height = "40px",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -24,8 +28,9 @@ export const SelectButton: FC<IconButtonProps> = ({
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      style={{ width, height }}
     >
       {isSelected ? selectedIcon : isHovered ? hoveredIcon : unselectedIcon}
     </button>
   );
-}; 
+};

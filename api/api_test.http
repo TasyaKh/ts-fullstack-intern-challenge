@@ -1,0 +1,37 @@
+### Get all favorite cats
+GET http://localhost:3000/likes
+Content-Type: application/json
+
+###
+
+### Add a cat to favorites
+POST http://localhost:3000/likes
+Content-Type: application/json
+
+{
+  "cat_id": "test-cat-id-123"
+}
+
+###
+
+### Remove a cat from favorites
+DELETE http://localhost:3000/likes/test-cat-id-123
+Content-Type: application/json
+
+###
+
+### Test with invalid cat_id (should return 405)
+POST http://localhost:3000/likes
+Content-Type: application/json
+
+{
+  "cat_id": "22"
+}
+
+###
+
+### Test removing non-existent cat (should return 404)
+DELETE http://localhost:3000/likes/non-existent-cat-id
+Content-Type: application/json
+
+### 

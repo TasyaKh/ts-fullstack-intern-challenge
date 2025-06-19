@@ -34,5 +34,5 @@ const FavoriteCats = observer(() => {
     </div>
   );
 });
-
 export default FavoriteCats;
+

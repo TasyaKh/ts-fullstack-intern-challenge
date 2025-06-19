@@ -37,7 +37,7 @@ class CatsStore {
     try {
       const newCats = await catApi.getImages({
         page: this.page,
-        limit: 10,
+        limit: 15,
       });
       this.setCats(newCats);
     } catch (error) {

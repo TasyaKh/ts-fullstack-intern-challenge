@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { FavoriteCat } from './entities/favorite-cat.entity';
 
 @Injectable()
@@ -25,7 +25,7 @@ export class FavoriteCatsService {
     return this.favoriteCatsRepository.save(favoriteCat);
   }
 
-  async remove(catId: string): Promise<void> {
-    await this.favoriteCatsRepository.delete({ catId });
+  async remove(catId: string): Promise<DeleteResult> {
+    return await this.favoriteCatsRepository.delete({ catId });
   }
 }
