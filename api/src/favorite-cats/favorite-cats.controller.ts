@@ -8,9 +8,12 @@ import {
   HttpException,
   HttpStatus,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
 import { FavoriteCatsService } from './favorite-cats.service';
+import { AuthGuard } from '../auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('likes')
 export class FavoriteCatsController {
   constructor(private readonly favoriteCatsService: FavoriteCatsService) {}

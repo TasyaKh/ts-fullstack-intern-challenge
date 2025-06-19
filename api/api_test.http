@@ -1,7 +1,7 @@
 ### Get all favorite cats
 GET http://localhost:3000/likes
 Content-Type: application/json
-
+Authorization: Bearer eyJsb2dpbiI6InRlc3R1c2VyMSIsInRzIjoxNzUwMzQ3ODQzMzcwfQ==.dca77b7568c145097eba618bbc949e500ecfc6e6bfe4dce9fef5e10ee596f038
 ###
 
 ### Add a cat to favorites
@@ -33,5 +33,26 @@ Content-Type: application/json
 ### Test removing non-existent cat (should return 404)
 DELETE http://localhost:3000/likes/non-existent-cat-id
 Content-Type: application/json
+
+###
+
+### Register a new user
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "login": "testuser1",
+  "password": "testpassword1"
+}
+
+###
+
+### Register with missing fields (should return 405)
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "login": "testuser2"
+}
 
 ### 
